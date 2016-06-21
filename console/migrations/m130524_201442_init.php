@@ -6,12 +6,6 @@ class m130524_201442_init extends Migration
 {
     public function up()
     {
-        $tableOptions = null;
-        if ($this->db->driverName === 'mysql') {
-            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-        }
-
         $this->createTable('user', [
             'id' => $this->primaryKey(),
             'username' => $this->string()->notNull(),
@@ -20,7 +14,7 @@ class m130524_201442_init extends Migration
             'password_reset_token' => $this->string(),
             'email' => $this->string()->notNull(),
             'gender' => $this->string(),
-            'birthday' => $this->dateTime(),
+            'birthday' => $this->date(),
             'role' => $this->string()->notNull(),
             'last_visit' => $this->dateTime(),
             'photo' => $this->string(),
@@ -29,9 +23,10 @@ class m130524_201442_init extends Migration
             'oauth_id' => $this->string(),
             'photo_url' => $this->string(),
             'status' => $this->string()->notNull(),
+            'is_subscribed' => $this->boolean()->notNull(),
             'created_at' => $this->dateTime()->notNull(),
             'updated_at' => $this->dateTime(),
-        ], $tableOptions);
+        ]);
 
         $this->createTable('event', [
             'id' => $this->primaryKey(),
@@ -54,19 +49,20 @@ class m130524_201442_init extends Migration
             'updated_by' => $this->integer(),
             'updated_at' => $this->dateTime(),
             'published_at' => $this->dateTime(),
-        ], $tableOptions);
+        ]);
 
         $this->createTable('category', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'top_menu' => $this->integer(),
             'created_at' => $this->dateTime()->notNull(),
-        ], $tableOptions);
+        ]);
 
         $this->createTable('event_category', [
             'event_id' => $this->integer()->notNull(),
             'category_id' => $this->integer()->notNull(),
-        ], $tableOptions);
+        ]);
+
         $this->addPrimaryKey('event_category_pkey', 'event_category', ['event_id', 'category_id']);
         $this->addForeignKey('event_category_event_id_fkey', 'event_category', 'event_id', 'event', 'id', 'cascade');
         $this->addForeignKey('event_category_category_id_fkey', 'event_category', 'category_id', 'category', 'id');
@@ -74,7 +70,7 @@ class m130524_201442_init extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'created_at' => $this->dateTime()->notNull(),
-        ], $tableOptions);
+        ]);
     }
 
     public function down()

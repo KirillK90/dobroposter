@@ -96,6 +96,9 @@ class User extends ActiveRecord implements IdentityInterface
             [['email'], 'default', 'value' => '', 'when'=> function(User $model){
                 return !$model->oauth;
             }],
+            [['is_subscribed'], 'default', 'value' => true, 'when'=> function(User $model){
+                return $model->email;
+            }],
             [['oauth_id', 'oauth_service'], 'required', 'when'=> function(User $model){
                 return $model->oauth;
             }],

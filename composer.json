@@ -21,6 +21,7 @@
         "yiidoc/yii2-redactor": "*",
         "2amigos/yii2-file-upload-widget": "~1.0",
         "2amigos/yii2-multi-select-widget" : "*",
+        "kartik-v/yii2-widget-datetimepicker": "*",
         "cakebake/yii2-bootstrap-select": "*",
         "yurkinx/yii2-image": "dev-master",
         "nodge/yii2-eauth": "~2.0"

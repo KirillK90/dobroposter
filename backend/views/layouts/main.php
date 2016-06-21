@@ -1,9 +1,6 @@
 <?php
 use backend\assets\AppAsset;
-use common\components\helpers\Icon;
-use common\enums\ArticleType;
-use common\enums\UserRole;
-use frontend\widgets\Alert;
+use backend\widgets\Alert;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
@@ -46,44 +43,12 @@ AppAsset::register($this);
                     'linkOptions' => ['data-method' => 'post']
                 ]];
 
-                if ($this->getUser()->role == UserRole::EDITOR) {
-                    $mainMenuItems = [
-                        ['label' => 'Страницы', 'url' => ['/articles/index', 'type' => ArticleType::PAGE]],
-                        ['label' => 'Новости', 'url' => ['/articles/index', 'type' => ArticleType::NEWS]],
-                        ['label' => 'Аналитика', 'url' => ['/articles/index', 'type' => ArticleType::ANALYTICS]],
-                        ['label' => 'Гид по вкладам', 'url' => ['/articles/index', 'type' => ArticleType::GUIDES]],
-                        ['label' =>  Icon::i('plus').' Добавить', 'url' => ['/articles/new']],
-
-                    ];
-                } else {
-
-                    $mainMenuItems = [
-                        ['label' => 'Управление вкладами', 'items' => [
-                            ['label' => 'Банки и вклады', 'url' => ['/banks']],
-                            ['label' => 'Структура вкладов', 'url' => '/structure'],
-                            ['label' => 'Рейтинг вкладов', 'url' => '/ratings'],
-                        ]],
-                        ['label' => 'Города', 'url' => ['/regions']],
-                        ['label' => 'Справочники', 'url' => ['/helpers']],
-                        ['label' => 'UI-блоки', 'items' => [
-                            ['label' => 'Баннеры', 'url' => ['/page-banners']],
-                            ['label' => 'Слайдеры со вкладами', 'url' => '/sliders'],
-                            ['label' => 'Блоки с подборками вкладов', 'url' => '/blocks'],
-                            ['label' => 'Кастомизация иконок на главной', 'url' => ['/icons']]
-                        ]],
-                        ['label' => 'Материалы', 'items' => [
-                            ['label' => 'СЕО', 'url' => ['/seo']],
-                            ['label' => 'Страницы', 'url' => ['/articles/index', 'type' => ArticleType::PAGE]],
-                            ['label' => 'Новости', 'url' => ['/articles/index', 'type' => ArticleType::NEWS]],
-                            ['label' => 'Аналитика', 'url' => ['/articles/index', 'type' => ArticleType::ANALYTICS]],
-                            ['label' => 'Гид по вкладам', 'url' => ['/articles/index', 'type' => ArticleType::GUIDES]],
-                            ['label' =>  Icon::i('plus').' Добавить', 'url' => ['/articles/new']],
-                        ]],
-                        ['label' => 'Синхронизация', 'url' => ['/api']],
-                        ['label' => 'Пользователи', 'url' => '/users'],
-                    ];
-
-                }
+                $mainMenuItems = [
+                    ['label' => 'События', 'url' => ['/events/index']],
+                    ['label' => 'Категории', 'url' => ['/categories/index']],
+                    ['label' => 'Места', 'url' => ['/places/index']],
+                    ['label' => 'Пользователи', 'url' => ['/users/index']],
+                ];
             }
 
             echo Nav::widget([
