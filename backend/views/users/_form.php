@@ -32,7 +32,7 @@ use yii\helpers\Html;
         'value' => date('Y-m-d'),
         'format' => 'yyyy-mm-dd'
     ]
-]);; ?>
+]); ?>
 
 
 <div class="form-group">

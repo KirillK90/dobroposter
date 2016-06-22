@@ -2,8 +2,8 @@
 namespace backend\controllers;
 
 use backend\components\Controller;
-use backend\models\EventsFilter;
-use common\models\Event;
+use backend\models\PlacesFilter;
+use common\models\Place;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\bootstrap\ActiveForm;
@@ -12,19 +12,19 @@ use yii\web\Response;
 /**
  *  Users controller
  */
-class EventsController extends Controller
+class PlacesController extends Controller
 {
 
     public function actionIndex()
     {
-        $filter = new EventsFilter();
+        $filter = new PlacesFilter();
         $filter->load(Yii::$app->request->get());
         return $this->render('index', compact('filter'));
     }
 
     public function actionCreate()
     {
-        $model = new Event();
+        $model = new Place();
         if ($model->load(Yii::$app->request->post())) {
             if (Yii::$app->request->isAjax) {
                 Yii::$app->response->format = Response::FORMAT_JSON;
@@ -76,12 +76,12 @@ class EventsController extends Controller
 
     /**
      * @param $id
-     * @return Event
+     * @return Place
      * @throws NotSupportedException
      */
     protected function findModel($id)
     {
-        if ($model = Event::findOne($id)) {
+        if ($model = Place::findOne($id)) {
             return $model;
         }
         throw new NotSupportedException('Категория не найдена.');

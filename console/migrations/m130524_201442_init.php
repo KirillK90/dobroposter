@@ -28,12 +28,36 @@ class m130524_201442_init extends Migration
             'updated_at' => $this->dateTime(),
         ]);
 
+        $this->createTable('category', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string()->notNull(),
+            'menu_pos' => $this->integer(),
+            'primary' => $this->boolean()->notNull(),
+            'created_at' => $this->dateTime()->notNull(),
+        ]);
+
+        $this->createTable('format', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string()->notNull(),
+            'menu_pos' => $this->integer(),
+            'primary' => $this->boolean()->notNull(),
+            'created_at' => $this->dateTime()->notNull(),
+        ]);
+
+
+
+        $this->createTable('place', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string()->notNull(),
+            'created_at' => $this->dateTime()->notNull(),
+        ]);
+
         $this->createTable('event', [
             'id' => $this->primaryKey(),
             'created_at' => $this->dateTime()->notNull(),
             'name' => $this->string()->notNull(),
             'slug' => $this->string()->notNull(),
-            'type' => $this->string()->notNull(),
+            'format_id' => $this->integer()->notNull(),
             'place_id' => $this->integer(),
             'announcement' => $this->string()->notNull(),
             'description' => $this->text()->notNull(),
@@ -51,12 +75,8 @@ class m130524_201442_init extends Migration
             'published_at' => $this->dateTime(),
         ]);
 
-        $this->createTable('category', [
-            'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull(),
-            'top_menu' => $this->integer(),
-            'created_at' => $this->dateTime()->notNull(),
-        ]);
+        $this->addForeignKey('event_format_id_fkey', 'event', 'format_id', 'format', 'id');
+        $this->addForeignKey('event_place_id_fkey', 'event', 'place_id', 'place', 'id');
 
         $this->createTable('event_category', [
             'event_id' => $this->integer()->notNull(),
@@ -64,21 +84,17 @@ class m130524_201442_init extends Migration
         ]);
 
         $this->addPrimaryKey('event_category_pkey', 'event_category', ['event_id', 'category_id']);
-        $this->addForeignKey('event_category_event_id_fkey', 'event_category', 'event_id', 'event', 'id', 'cascade');
         $this->addForeignKey('event_category_category_id_fkey', 'event_category', 'category_id', 'category', 'id');
-        $this->createTable('place', [
-            'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull(),
-            'created_at' => $this->dateTime()->notNull(),
-        ]);
+        $this->addForeignKey('event_category_event_id_fkey', 'event_category', 'event_id', 'event', 'id', 'cascade');
     }
 
     public function down()
     {
         $this->dropTable('user');
         $this->dropTable('event_category');
-        $this->dropTable('event');
         $this->dropTable('category');
+        $this->dropTable('format');
         $this->dropTable('place');
+        $this->dropTable('event');
     }
 }

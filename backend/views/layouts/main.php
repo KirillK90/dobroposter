@@ -46,6 +46,7 @@ AppAsset::register($this);
                 $mainMenuItems = [
                     ['label' => 'События', 'url' => ['/events/index']],
                     ['label' => 'Категории', 'url' => ['/categories/index']],
+                    ['label' => 'Форматы', 'url' => ['/formats/index']],
                     ['label' => 'Места', 'url' => ['/places/index']],
                     ['label' => 'Пользователи', 'url' => ['/users/index']],
                 ];

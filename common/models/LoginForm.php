@@ -55,9 +55,9 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Неверная почта или пароль: '.($user->validatePassword($this->password) ? 't' : 'f'));
-            } elseif ($this->allowedRoles && !in_array($user->role, $this->allowedRoles)) {
                 $this->addError($attribute, 'Неверная почта или пароль');
+            } elseif ($this->allowedRoles && !in_array($user->role, $this->allowedRoles)) {
+                $this->addError($attribute, 'Неверная почта или пароль.');
             }
         }
     }
