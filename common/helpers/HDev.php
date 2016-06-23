@@ -1,6 +1,6 @@
 <?php 
 
-namespace common\components\helpers;
+namespace common\helpers;
 
 use Yii;
 use yii\base\Model;
@@ -45,7 +45,7 @@ class HDev
         Yii::getLogger()->log(print_r($obj, true), $level, 'debug.dump');
     }
 
-    public static function logSaveError(Model $model, $throwException = false)
+    public static function logSaveError(Model $model, $throwException = true)
     {
         if (defined('DEBUG_BACKTRACE_IGNORE_ARGS')) {
             $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);

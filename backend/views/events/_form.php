@@ -2,6 +2,8 @@
 /* @var $this common\components\View */
 /* @var $model common\models\Event */
 
+use backend\widgets\ImageUploadWidget;
+use common\enums\ImageType;
 use common\models\Format;
 use common\models\Place;
 use kartik\datetime\DateTimePicker;
@@ -9,26 +11,35 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\redactor\widgets\Redactor;
 
+$this->registerJs(<<<JS
+    $("#event-free").change(function(){
+            $(".field-event-price_min").toggle(!$(this).prop('checked'));
+        }).trigger('change');
+JS
+);
+
 /** @var ActiveForm $form */
 ?>
+<? $form = ActiveForm::begin(); ?>
 <div class="row">
     <div class="col-md-8">
-<? $form = ActiveForm::begin(); ?>
+        <?= $form->errorSummary($model)?>
 <? if (!$model->isNewRecord): ?>
 <?= $form->field($model, 'id')->staticControl(); ?>
 <?= $form->field($model, 'created_at')->staticControl(); ?>
 <? endif ?>
 <?= $form->field($model, 'name')->textInput(); ?>
+<?= $form->field($model, 'slug', [
+            'inputTemplate' => '<div class="input-group"><span class="input-group-addon">'.Yii::getAlias('@site').'/events/</span>{input}</div>'
+        ])->textInput(); ?>
 <?= $form->field($model, 'format_id')->dropDownList(Format::getList()); ?>
 <?= $form->field($model, 'place_id')->dropDownList(Place::getList()); ?>
-<?//= $form->field($model, 'image_src')->widget(Place::getList()); ?>
+<?= $form->field($model, "image_src")->widget(ImageUploadWidget::classname(), ['type' => ImageType::EVENT, 'src' => $model->getImageSrc()]); ?>
 <?= $form->field($model, 'announcement')->textarea(); ?>
 <?= $form->field($model, 'description')->widget(Redactor::className()); ?>
 
 
 
-
-<?php ActiveForm::end(); ?>
     </div>
     <div class="col-md-4">
         <?= $form->field($model, 'start_time')->widget(DateTimePicker::className(), [
@@ -45,7 +56,11 @@ use yii\redactor\widgets\Redactor;
                 'format' => 'yyyy-mm-dd hh:ii'
             ]
         ]); ?>
+        <?= $form->field($model, 'in_top')->checkbox(); ?>
         <?= $form->field($model, 'free')->checkbox(); ?>
+        <?= $form->field($model, 'price_min',  [
+            'inputTemplate' => '<div class="input-group">{input}<span class="input-group-addon">рублей</span></div>'
+        ])->textInput(); ?>
     </div>
 </div>
 <div class="form-group">
@@ -54,3 +69,4 @@ use yii\redactor\widgets\Redactor;
         <?= Html::resetButton('Сбосить', ['class' => 'btn btn-default']) ?>
     </div>
 </div>
+<?php ActiveForm::end(); ?>

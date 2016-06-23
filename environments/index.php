@@ -33,6 +33,8 @@ return [
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
+            'static/images/events',
+            'static/redactor',
             'static',
         ],
         'setExecutable' => [
@@ -50,6 +52,8 @@ return [
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
+            'static/images/events',
+            'static/redactor',
             'static',
         ],
         'setExecutable' => [
@@ -67,6 +71,8 @@ return [
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
+            'static/images/events',
+            'static/redactor',
             'static',
         ],
         'setExecutable' => [

@@ -5,6 +5,8 @@
 use backend\models\UserFilter;
 use common\components\View;
 use common\models\Event;
+use common\models\Format;
+use common\models\Place;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -40,6 +42,27 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute' => 'name',
+        ],
+        [
+            'attribute' => 'format_id',
+            'value' => function(Event $event) {
+                return $event->format->name;
+            },
+            'filter' => Format::getList()
+        ],
+        [
+            'attribute' => 'place_id',
+            'value' => function(Event $event) {
+                return $event->place->name;
+            },
+            'filter' => Place::getList()
+        ],
+        [
+            'attribute' => 'start_time',
+            'filter' => false,
+            'contentOptions' => [
+                'class' => 'centred'
+            ]
         ],
         [
             'class' => ActionColumn::className(),

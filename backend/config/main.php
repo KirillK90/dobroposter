@@ -49,13 +49,7 @@ return [
             // Disable r= routes
             'enablePrettyUrl' => true,
             'rules' => array(
-                '<controller:(seo)>/<action:(update-default)>/<page:\w+>' => '<controller>/<action>',
-                '<controller:(seo)>/<action:(create|update|delete)>/<page:\w+>/<param_id:\d+>' => '<controller>/<action>',
-                '<controller:(page-banners)>/<action:(update)>/<place:\w+>' => '<controller>/<action>',
-                '<controller:(page)>/<action:(update)>/<type:\w+>' => '<controller>/<action>',
-                '<controller:(articles)>/<action:(create)>/<type:\w+>' => '<controller>/<action>',
-                '<controller:(articles)>/<type:(page|gid)>s' => '<controller>/index',
-                '<controller:(articles)>/<type:(news|analytics)>' => '<controller>/index',
+                'images/upload/<type:[-\w]+>' => 'images/upload',
 
                 '<controller:\w+>' => '<controller>/index',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',

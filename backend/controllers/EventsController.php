@@ -25,6 +25,7 @@ class EventsController extends Controller
     public function actionCreate()
     {
         $model = new Event();
+        $model->loadDefaultValues();
         if ($model->load(Yii::$app->request->post())) {
             if (Yii::$app->request->isAjax) {
                 Yii::$app->response->format = Response::FORMAT_JSON;
@@ -32,7 +33,7 @@ class EventsController extends Controller
             }
             if ($model->save()) {
                 $this->setFlash('success', ACTION_CREATE_SUCCESS);
-                $this->redirect(['index']);
+                $this->redirect(['update', 'id' => $model->id]);
             } else {
                 $this->setFlash('error', ACTION_VALIDATE_ERROR);
             }
@@ -44,6 +45,7 @@ class EventsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->loadDefaultValues();
 
         if ($model->load(Yii::$app->request->post())) {
             if (Yii::$app->request->isAjax) {
@@ -53,7 +55,7 @@ class EventsController extends Controller
 
             if ($model->save()) {
                 $this->setFlash('success', ACTION_UPDATE_SUCCESS);
-                $this->redirect(['index']);
+                $this->redirect(['update', 'id' => $model->id]);
             } else {
                 $this->setFlash('error', ACTION_VALIDATE_ERROR);
             }

@@ -1,6 +1,6 @@
 <?php
 
-namespace common\components\helpers;
+namespace common\helpers;
 
 use yii\validators\NumberValidator;
 
