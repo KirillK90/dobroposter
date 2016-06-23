@@ -11,7 +11,7 @@ class m160623_082440_event_url_nullable extends Migration
 
     public function down()
     {
-        $this->execute('alter event alter column url SET NOT NULL');
+        $this->execute('alter table event alter column url SET NOT NULL');
     }
 
     /*
