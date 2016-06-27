@@ -4,9 +4,9 @@
  * @var $this View
  */
 
-use common\components\helpers\HDates;
 use common\components\helpers\HStrings;
 use common\enums\Currency;
+use common\helpers\HDates;
 use frontend\components\View;
 use frontend\models\Analytics;
 use yii\helpers\Html;

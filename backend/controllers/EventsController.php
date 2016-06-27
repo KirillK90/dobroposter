@@ -45,7 +45,7 @@ class EventsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->loadDefaultValues();
+
 
         if ($model->load(Yii::$app->request->post())) {
             if (Yii::$app->request->isAjax) {
@@ -59,6 +59,8 @@ class EventsController extends Controller
             } else {
                 $this->setFlash('error', ACTION_VALIDATE_ERROR);
             }
+        } else {
+            $model->loadValues();
         }
 
         return $this->render('update', ['model' => $model]);

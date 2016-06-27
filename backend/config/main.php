@@ -13,6 +13,7 @@ return [
     'bootstrap' => ['log'],
     'language' => "ru-RU",
     'name' => 'Добропостер',
+    'defaultRoute' => 'events',
     'components' => [
         'view' => [
             'class' => 'common\components\View',

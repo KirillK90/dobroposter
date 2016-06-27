@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use common\components\helpers\HDates;
+use common\helpers\HDates;
 use Yii;
 use yii\helpers\Url;
 

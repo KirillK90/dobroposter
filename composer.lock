@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "268bb2b29b7fbb4cdea751d78e47b9d9",
-    "content-hash": "b52f426570652793d4bae52aac249f22",
+    "hash": "4b69dea9ebb321e6090541e2b7b30c31",
     "packages": [
         {
             "name": "2amigos/yii2-multi-select-widget",
@@ -353,6 +352,29 @@
                     "package.json"
                 ]
             }
+        },
+        {
+            "name": "bower-asset/speakingurl",
+            "version": "v9.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pid/speakingurl.git",
+                "reference": "013eb82b59b1e5942ca3ccdfaeec2bffca81f7b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pid/speakingurl/zipball/013eb82b59b1e5942ca3ccdfaeec2bffca81f7b8",
+                "reference": "013eb82b59b1e5942ca3ccdfaeec2bffca81f7b8",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "speakingurl.min.js",
+                "bower-asset-ignore": [
+                    "node_modules"
+                ]
+            },
+            "description": "Generate a slug – transliteration with a lot of options"
         },
         {
             "name": "bower-asset/yii2-pjax",

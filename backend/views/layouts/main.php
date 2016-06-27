@@ -37,29 +37,29 @@ AppAsset::register($this);
                 $mainMenuItems = [];
                 $userMenuItems = [];
             } else {
-                $userMenuItems = [[
+                $userMenuItems = [];
+
+                $mainMenuItems = [
+                    ['label' => 'События', 'items' => [
+                        ['label' => 'Новое событие', 'url' => ['/events/create']],
+                        ['label' => 'Список', 'url' => ['/events/index']],
+                        ['label' => 'Категории', 'url' => ['/categories/index']],
+                        ['label' => 'Форматы', 'url' => ['/formats/index']],
+                        ['label' => 'Места', 'url' => ['/places/index']],
+                    ]],
+
+                    ['label' => 'Пользователи', 'url' => ['/users/index']],
+                ];
+                $mainMenuItems[] = [
                     'label' => 'Выход (' . $this->getUser()->username . ')',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
-                ]];
-
-                $mainMenuItems = [
-                    ['label' => 'События', 'url' => ['/events/index']],
-                    ['label' => 'Категории', 'url' => ['/categories/index']],
-                    ['label' => 'Форматы', 'url' => ['/formats/index']],
-                    ['label' => 'Места', 'url' => ['/places/index']],
-                    ['label' => 'Пользователи', 'url' => ['/users/index']],
                 ];
             }
 
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-left'],
-                'items' => $mainMenuItems,
-                'encodeLabels' => false
-            ]);
-            echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => $userMenuItems,
+                'items' => $mainMenuItems,
                 'encodeLabels' => false
             ]);
             NavBar::end();

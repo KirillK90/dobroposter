@@ -1,12 +1,12 @@
 <?php
 namespace common\models;
 
-use common\components\helpers\HDates;
 use common\components\helpers\HDev;
 use common\components\helpers\HStrings;
 use common\enums\Gender;
 use common\enums\OAuthName;
 use common\enums\UserRole;
+use common\helpers\HDates;
 use nodge\eauth\ErrorException;
 use Yii;
 use yii\base\NotSupportedException;

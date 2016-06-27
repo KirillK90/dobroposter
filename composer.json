@@ -24,7 +24,9 @@
         "cakebake/yii2-bootstrap-select": "*",
         "yurkinx/yii2-image": "dev-master",
         "nodge/yii2-eauth": "~2.0",
-        "bower-asset/blueimp-file-upload": "*"
+        "bower-asset/blueimp-file-upload": "*",
+        "bower-asset/speakingurl": "*"
+
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

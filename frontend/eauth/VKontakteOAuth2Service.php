@@ -9,8 +9,8 @@
 
 namespace frontend\eauth;
 
-use common\components\helpers\HDates;
 use common\enums\Gender;
+use common\helpers\HDates;
 
 class VKontakteOAuth2Service extends \nodge\eauth\services\VKontakteOAuth2Service
 {
