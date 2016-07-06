@@ -1,0 +1,126 @@
+
+body {
+    margin: 0;
+    padding: 0;
+}
+.clearfix {
+    clear: both;
+    display: block;
+}
+body {
+    color: #333;
+    font-family: "Open Sans",sans-serif;
+    font-size: 18px;
+    line-height: 32px;
+    word-wrap: break-word !important;
+}
+p {
+    margin: 0 0 2.4rem;
+    padding: 0;
+}
+a {
+    color: #ff5722;
+    text-decoration: none;
+}
+a:hover {
+    color: #e64a19;
+    text-decoration: underline;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    font-family: "Roboto Slab",sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 16px;
+}
+h1 {
+    font-size: 40px;
+}
+h2 {
+    font-size: 30px;
+}
+h3 {
+    font-size: 24px;
+}
+h4 {
+    font-size: 20px;
+}
+h5 {
+    font-size: 18px;
+}
+h6 {
+    font-size: 16px;
+}
+#container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+header {
+    background-color: #ff5722;
+    padding: 3%;
+    width: 94%;
+}
+header .site-header-logo {
+    color: #fff;
+    font-size: 50px;
+}
+nav {
+    background-color: #e64a19;
+    padding: 0 1.5%;
+    width: 97%;
+}
+nav ul li {
+    display: inline-block;
+    padding: 15px 1.5%;
+}
+nav ul li a {
+    color: #ffffff;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+nav ul li a:hover {
+    color: #000000;
+    text-decoration: none;
+}
+#content {
+    float: left;
+    padding: 3%;
+    width: 64%;
+}
+aside {
+    background-color: #eee;
+    float: right;
+    padding: 3%;
+    width: 24%;
+}
+footer {
+    background-color: #ff5722;
+    border-top: 5px solid #e64a19;
+    color: #fff;
+    padding: 3%;
+    text-align: center;
+    width: 94%;
+}
+@media all and (max-width: 768px) {
+    header {
+        text-align: center;
+    }
+    nav {
+        text-align: center;
+    }
+    #content {
+        padding: 3%;
+        width: 94%;
+    }
+    #sidebar {
+        border-top: 3px solid #e64a19;
+        padding: 3%;
+        width: 94%;
+    }
+}
+@media all and (max-width: 330px) {
+    nav ul li {
+        display: block;
+        width: 94%;
+    }
+}

@@ -18,21 +18,11 @@ class AppAsset extends AssetBundle
     public $sourcePath = '@upload';
 
     public $css = [
-        'css/jquery.fancybox.css',
+        'css/reset.css',
         'css/style.css',
-        'dist/style.css',
-    ];
-
-    public $js = [
-        'js/jquery.fancybox.js',
-        'js/main.js',
-        'js/link-top.js',
-        'js/jquery.pin.js',
-        'js/backToTop.js',
     ];
 
     public $depends = [
-        'common\assets\FontsAsset',
         'yii\web\JqueryAsset',
     ];
 }

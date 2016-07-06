@@ -13,8 +13,7 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'language' => "ru-RU",
-    'name' => 'Vklad.ru',
-    'homeUrl' => '/profile/',
+    'name' => 'Dobroposter.ru',
     'components' => [
         'user' => [
             'class' => 'frontend\components\User',
