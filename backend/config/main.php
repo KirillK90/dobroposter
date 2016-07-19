@@ -60,51 +60,6 @@ return [
             ),
 
         ],
-        'urlManagerFrontend' => [
-            'class' => 'yii\web\UrlManager',
-            // Disable index.php
-            'showScriptName' => false,
-            // Disable r= routes
-            'enablePrettyUrl' => true,
-            'suffix' => '/',
-            'rules' => [
-                [
-                    'pattern' => 'novosti/<slug:[-\w\d]+>',
-                    'route' => 'articles/view',
-                    'defaults' => ['type' => 'news'],
-                ],
-                [
-                    'pattern' => 'novosti',
-                    'route' => 'articles/index',
-                    'defaults' => ['type' => 'news'],
-                ],
-                [
-                    'pattern' => 'analitika/<slug:[-\w\d]+>',
-                    'route' => 'articles/view',
-                    'defaults' => ['type' => 'analytics'],
-                ],
-                [
-                    'pattern' => 'analitika',
-                    'route' => 'articles/index',
-                    'defaults' => ['type' => 'analytics'],
-                ],
-                [
-                    'pattern' => 'gid/<slug:[-\w\d]+>',
-                    'route' => 'articles/view',
-                    'defaults' => ['type' => 'guides'],
-                ],
-                [
-                    'pattern' => 'gid',
-                    'route' => 'articles/index',
-                    'defaults' => ['type' => 'guides'],
-                ],
-                [
-                    'pattern' => '<slug:[-\w\d]+>',
-                    'route' => 'articles/view',
-                    'defaults' => ['type' => 'page'],
-                ],
-            ]
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

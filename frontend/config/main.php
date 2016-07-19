@@ -44,75 +44,10 @@ return [
             'enablePrettyUrl' => true,
             'suffix' => '/',
             'rules' => [
-                '<action:(logout|signup|login|profile|search|eauth|confirm-email|reset-password|reset-password-request|subscribe|unsubscribe)>' => 'site/<action>',
-                'poisk' => 'site/search',
-                '<pageType:(about|contacts|adv|terms)>' => 'site/page',
-                'registration' => 'site/signup',
-
-                'cache/flush' => 'cache/flush',
-                'ajax/regions/filter' => 'regions/filter',
-                'ajax/regions/region-cities' => 'regions/region-cities',
-
-                'vidy-vkladov/<categorySlug:[-\w\d]+>/spisok-gorodov' => 'regions/index',
-                'vidy-vkladov/<slug:[-\w\d]+>/<regionSlug:[-\w\d]*>' => 'catalogs/category',
-                'vidy-vkladov/<slug:[-\w\d]+>' => 'catalogs/category',
-                'vidy-vkladov' => 'catalogs/index',
-
-                'banki/vklady-<bankSlug:[-\w\d]+>/vklad-<depositSlug:[-\w\d]+>/spisok-gorodov' => 'regions/index',
-                'banki/vklady-<bankSlug:[-\w\d]+>/vklad-<slug:[-\w\d]+>/similar' => 'deposits/similar',
-                'banki/vklady-<bankSlug:[-\w\d]+>/vklad-<slug:[-\w\d]+>/<regionSlug:[-\w\d]*>' => 'deposits/view',
-                'banki/vklady-<bankSlug:[-\w\d]+>/vklad-<slug:[-\w\d]+>' => 'deposits/view',
-                'banki/vklady-<bankSlug:[-\w\d]+>/spisok-gorodov' => 'regions/index',
-                'banki/vklady-<bankSlug:[-\w\d]+>/kategorii' => 'catalogs/bank',
-                'banki/vklady-<slug:[-\w\d]+>/kategorii/<categorySlug:[-\w\d]+>' => 'banks/category',
-                'banki/vklady-<slug:[-\w\d]+>/<regionSlug:[-\w\d]*>' => 'banks/view',
-                'banki/vklady-<slug:[-\w\d]+>/' => 'banks/view',
-
-                'poisk-vkladov/<regionSlug:[-\w\d]*>' => 'deposits/search',
-                'poisk-vkladov' => 'deposits/search',
-                'banki' => 'banks/index',
-
-                'spisok-gorodov/<regionSlug:[-\w\d]+>' => 'regions/switch',
-                'spisok-gorodov' => 'regions/index',
-
-                'analitika/best' => 'articles/best',
-                'analitika/chart' => 'articles/chart',
-
-                [
-                    'pattern' => 'novosti/<slug:[-\w\d]+>',
-                    'route' => 'articles/view',
-                    'defaults' => ['type' => 'news'],
-                ],
-                [
-                    'pattern' => 'novosti',
-                    'route' => 'articles/index',
-                    'defaults' => ['type' => 'news'],
-                ],
-                [
-                    'pattern' => 'analitika/<slug:[-\w\d]+>',
-                    'route' => 'articles/view',
-                    'defaults' => ['type' => 'analytics'],
-                ],
-                [
-                    'pattern' => 'analitika',
-                    'route' => 'articles/index',
-                    'defaults' => ['type' => 'analytics'],
-                ],
-                [
-                    'pattern' => 'gid/<slug:[-\w\d]+>',
-                    'route' => 'articles/view',
-                    'defaults' => ['type' => 'guides'],
-                ],
-                [
-                    'pattern' => 'gid',
-                    'route' => 'articles/index',
-                    'defaults' => ['type' => 'guides'],
-                ],
-                [
-                    'pattern' => '<slug:[-\w\d]+>',
-                    'route' => 'articles/view',
-                    'defaults' => ['type' => 'page'],
-                ],
+                '<controller:\w+>' => '<controller>/index',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:[-\w]+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ]
         ],
         'log' => [

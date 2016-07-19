@@ -10,14 +10,14 @@ namespace console\components;
 
 
 use yii\base\Exception;
-use yii\console\Controller;
 use yii\db\ActiveRecord;
 use yii\log\Logger;
 
-class UConsoleCommand  extends Controller
+class Controller  extends \yii\console\Controller
 {
     public $startTime;
     public $time;
+    public $logCategory;
 
     public function actionIndex()
     {
@@ -34,7 +34,7 @@ class UConsoleCommand  extends Controller
     {
         print_r($message);
         echo "\n";
-        \Yii::getLogger()->log(print_r($message, true), $level, 'command.'.$this->getUniqueId());
+        \Yii::getLogger()->log(print_r($message, true), $level, $this->logCategory ?: 'command.'.$this->getUniqueId());
     }
 
     protected function requireSave(ActiveRecord $model)
@@ -81,7 +81,7 @@ class UConsoleCommand  extends Controller
         $time = round(microtime(true) - $this->time, 2);
         print_r($message);
         echo " ($time s)\n";
-        \Yii::getLogger()->log($message, $level, 'command.'.$this->getUniqueId());
+        \Yii::getLogger()->log($message." ($time s)", $level, $this->logCategory ?: 'command.'.$this->getUniqueId());
         $this->startProfile();
     }
 
@@ -91,7 +91,7 @@ class UConsoleCommand  extends Controller
         $time = round(microtime(true) - $this->startTime, 2);
         print_r($message);
         echo " ($time s)\n";
-        \Yii::getLogger()->log($message, $level, 'command.'.$this->getUniqueId());
+        \Yii::getLogger()->log($message." ($time s)", $level, $this->logCategory ?: 'command.'.$this->getUniqueId());
     }
 
     public function delimeter()

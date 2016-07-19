@@ -3,21 +3,20 @@
 namespace common\models;
 
 use common\enums\EventStatus;
-use common\enums\ImageType;
 use common\helpers\HDates;
-use common\helpers\HImage;
 use common\helpers\HStrings;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use yii\image\drivers\Image;
 
 /**
  * This is the model class for table "event".
  *
  * @property integer $id
  * @property string $created_at
- * @property string $name
+ * @property string $title
  * @property string $slug
  * @property string $type
  * @property integer $place_id
@@ -43,6 +42,12 @@ use yii\helpers\Url;
  */
 class Event extends \yii\db\ActiveRecord
 {
+    public $author_id;
+
+    const IMAGE_PREVIEW_WIDTH = 350;
+    const IMAGE_PREVIEW_HEIGHT = 158;
+    const IMAGE_BIG_PREVIEW_WIDTH = 570;
+    const IMAGE_BIG_PREVIEW_HEIGHT = 325;
 
     public $category_ids;
 
@@ -92,7 +97,7 @@ class Event extends \yii\db\ActiveRecord
     {
         if ($insert) {
             $this->created_at = HDates::long();
-            $this->slug = HStrings::transliterate($this->name);
+            $this->slug = HStrings::transliterate($this->title);
         } else {
             $this->updated_at = HDates::long();
 
@@ -129,14 +134,14 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'format_id', 'announcement', 'description', 'start_time', 'end_time', 'status', 'slug', 'category_ids'], 'required'],
+            [['title', 'format_id', 'announcement', 'description', 'start_time', 'end_time', 'status', 'slug', 'category_ids'], 'required'],
             [['created_at', 'start_time', 'end_time', 'updated_at', 'published_at'], 'safe'],
             [['place_id', 'price_min', 'created_by', 'updated_by'], 'integer'],
             [['category_ids'], 'each', 'rule' => ['integer']],
             [['description'], 'string'],
-            [['name', 'slug'], 'unique'],
+            [['title', 'slug'], 'unique'],
             [['free', 'in_top'], 'boolean'],
-            [['name', 'slug', 'announcement', 'status', 'image_src', 'url'], 'string', 'max' => 255],
+            [['title', 'slug', 'announcement', 'status', 'image_src', 'url'], 'string', 'max' => 255],
         ];
     }
 
@@ -148,7 +153,7 @@ class Event extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'created_at' => 'Добавлено',
-            'name' => 'Название',
+            'title' => 'Название',
             'slug' => 'Алиас',
             'type' => 'Тип',
             'format_id' => 'Формат',
@@ -200,8 +205,36 @@ class Event extends \yii\db\ActiveRecord
         return Url::to(['events/update', 'id' => $this->id]);
     }
 
-    public function getImageSrc()
+    /**
+     * @param bool $preview
+     * @param bool $bigPreview
+     * @return string
+     * @throws \yii\base\ErrorException
+     */
+    public function getImageSrc($preview = false, $bigPreview = false)
     {
-        return HImage::getSrc(ImageType::EVENT, $this->image_src);
+        $uploadPath = Yii::getAlias('@upload/images/events');
+        if ($preview && $this->image_src) {
+            $width = $bigPreview ? self::IMAGE_BIG_PREVIEW_WIDTH : self::IMAGE_PREVIEW_WIDTH;
+            $height = $bigPreview ? self::IMAGE_BIG_PREVIEW_HEIGHT : self::IMAGE_PREVIEW_HEIGHT;
+            $src = substr_replace($this->image_src, '_'.$width.'_'.$height, strrpos($this->image_src, '.'), 0);
+
+            $fullPath = $uploadPath.'/'.$src;
+            if (!file_exists($fullPath)) {
+                $path = $uploadPath.'/'.$this->image_src;
+                if (file_exists($path)) {
+                    /** @var Image $image */
+                    $image =  Yii::$app->image->load($path);
+                    $image->resize($width, $height, Image::PRECISE);
+                    $image->save($fullPath);
+                } else {
+                    Yii::error("$path doesn't exists for article {$this->id}");
+                    $src = $this->image_src;
+                }
+            }
+        } else {
+            $src = $this->image_src;
+        }
+        return $src ? Yii::getAlias('@static/images/events') . '/' . $src : null;
     }
 }

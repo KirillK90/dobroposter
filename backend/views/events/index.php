@@ -41,7 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ],
         [
-            'attribute' => 'name',
+            'attribute' => 'title',
+            'format' => 'html',
+            'value' => function (Event $model) {
+                return Html::a($model->title, $model->getUpdateUrl());
+            },
         ],
         [
             'attribute' => 'format_id',

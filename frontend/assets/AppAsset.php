@@ -18,11 +18,11 @@ class AppAsset extends AssetBundle
     public $sourcePath = '@upload';
 
     public $css = [
-        'css/reset.css',
+        'css/casual.css',
         'css/style.css',
     ];
 
     public $depends = [
-        'yii\web\JqueryAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

@@ -5,6 +5,7 @@ use common\components\helpers\HDev;
 use common\models\User;
 use frontend\components\Controller;
 use frontend\models\ChangePasswordForm;
+use frontend\models\EventsFilter;
 use frontend\models\LoginForm;
 use frontend\models\PasswordResetChangeForm;
 use frontend\models\PasswordResetRequestForm;
@@ -55,7 +56,13 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('front');
+        $model = new EventsFilter();
+        return $this->render('front', ['model' => $model]);
+    }
+
+    public function actionAbout()
+    {
+        return $this->render('about');
     }
 
     public function actionPage()

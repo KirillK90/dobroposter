@@ -38,7 +38,7 @@ JS
 <?= $form->field($model, 'id')->staticControl(); ?>
 <?= $form->field($model, 'created_at')->staticControl(); ?>
 <? endif ?>
-<?= $form->field($model, 'name')->textInput(); ?>
+<?= $form->field($model, 'title')->textInput(); ?>
 <?= $form->field($model, 'slug', [
             'inputTemplate' => '<div class="input-group"><span class="input-group-addon">'.Yii::getAlias('@site').'/events/</span>{input}</div>'
         ])->textInput(); ?>

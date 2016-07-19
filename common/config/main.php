@@ -15,6 +15,7 @@ $prefixFunc = function($message) {
 };
 
 return [
+    'language' => 'ru-RU',
     'aliases' => [
         '@admin' => 'http://admin.vklad.ru',
         '@site' => 'http://vklad.ru',
