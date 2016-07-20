@@ -41,7 +41,7 @@ class Controller extends \common\components\Controller
     public function beforeAction($action)
     {
         $user = $this->getUser();
-        if (!$user || !in_array($user->role, $this->allowedRoles)) {
+        if ($user && !in_array($user->role, $this->allowedRoles)) {
             throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
         }
         return parent::beforeAction($action);
