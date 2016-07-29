@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\enums\ArticleStatus;
 use common\enums\ArticleType;
 use common\models\Article;
+use common\models\Event;
 use frontend\components\Controller;
 use frontend\models\Analytics;
 use Yii;
@@ -44,14 +45,17 @@ class EventsController extends Controller
 
     /**
      * Displays a single News model.
-     * @param $type
      * @param $slug
-     * @param bool $preview
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionView()
+    public function actionView($slug)
     {
+        /** @var Event $model */
+        $model = Event::find()->where(['slug' => $slug])->one();
+        if (!$model) {
+            throw new NotFoundHttpException("Событие не найдено");
+        }
         return $this->render('view', compact('model'));
     }
 

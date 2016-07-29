@@ -18,7 +18,7 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
-    <title><?=$this->title ?></title>
+    <title><?=$this->title ." - ".Yii::$app->name  ?></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +30,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <!-- BEGIN BODY -->
-
+<div class="wrap">
 <div class="container main-container">
     <header class="header">
         <div class="header-image">
@@ -43,7 +43,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Главная', 'url' => Yii::$app->homeUrl],
             ['label' => 'О проекте', 'url' => ['/site/about']],
-            ['label' => 'Статьи', 'url' => ['/articles/index']],
+//            ['label' => 'Статьи', 'url' => ['/articles/index']],
             ['label' => 'Контакты', 'url' => ['/site/contacts']],
         ],
         'options' => ['class' => 'navbar-nav'],
@@ -52,16 +52,11 @@ AppAsset::register($this);
 
     <?=$content?>
 </div>
+</div>
 <!-- /.container -->
 
 <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <p>Copyright &copy; <?=date('Y')?></p>
-            </div>
-        </div>
-    </div>
+    <p class="text-center">Copyright &copy; <?=date('Y')?></p>
 </footer>
 
 <?php $this->endBody() ?>

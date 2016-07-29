@@ -41,6 +41,9 @@ class EventsFilter extends Event
             'query' => $query,
             'sort' => [
                 'defaultOrder' => ['id' => SORT_DESC],
+            ],
+            'pagination' => [
+                'defaultPageSize' => 6
             ]
         ]);
     }

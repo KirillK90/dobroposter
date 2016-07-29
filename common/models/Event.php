@@ -237,4 +237,22 @@ class Event extends \yii\db\ActiveRecord
         }
         return $src ? Yii::getAlias('@static/images/events') . '/' . $src : null;
     }
+
+    public function getTimePeriod()
+    {
+        $startTime = new \DateTime($this->start_time);
+        $endTime = new \DateTime($this->end_time);
+        if ($startTime->format('d H:i') == $endTime->format('d H:i')) {
+            return $startTime->format("j F H:i");
+        } elseif ($startTime->format('d') == $endTime->format('d')) {
+            return $startTime->format("j F")." (".$startTime->format('H:i')." - ".$endTime->format('H:i').")";
+        } else {
+            return $startTime->format("j F H:i")." - ".$endTime->format('j F H:i');
+        }
+    }
+
+    public function getCategoriesStr()
+    {
+        return implode(', ', ArrayHelper::getColumn($this->categories, 'name'));
+    }
 }

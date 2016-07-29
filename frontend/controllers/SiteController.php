@@ -65,6 +65,11 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    public function actionContacts()
+    {
+        return $this->render('contacts');
+    }
+
     public function actionPage()
     {
         return $this->render('page');

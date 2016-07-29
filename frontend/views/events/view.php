@@ -1,25 +1,26 @@
 <?php
 
+use common\models\Event;
 use frontend\components\View;
 
 /**
  * @var $this View
+ * @var $model Event
  * @var $flashMessages
  */
-$this->title = 'О проекте'
+$this->title = $model->title;
 ?>
 
     <div class="box">
         <div class="col-lg-12">
-            <hr>
-            <h2 class="intro-text text-center">Страница события
-                <strong>worth visiting</strong>
-            </h2>
-            <hr>
-            <img class="img-responsive img-border img-left" src="img/intro-pic.jpg" alt="">
+            <h1 class="intro-text text-center">Cобытие <strong><?=$model->title?></strong></h1>
             <hr class="visible-xs">
-            <p>The boxes used in this template are nested inbetween a normal Bootstrap row and the start of your column layout. The boxes will be full-width boxes, so if you want to make them smaller then you will need to customize.</p>
-            <p>A huge thanks to <a href="http://join.deathtothestockphoto.com/" target="_blank">Death to the Stock Photo</a> for allowing us to use the beautiful photos that make this template really come to life. When using this template, make sure your photos are decent. Also make sure that the file size on your photos is kept to a minumum to keep load times to a minimum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc placerat diam quis nisl vestibulum dignissim. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+            <div class="row" style="margin: 15px -10px;">
+                    <div class="col-md-3"><i class="glyphicon glyphicon-time"></i>&nbsp;<strong><?=$model->getTimePeriod()?></strong></div>
+                    <div class="col-md-3"><i class="glyphicon glyphicon-map-marker"></i>&nbsp;<strong><?=$model->place->name?>, <?=$model->format->name?></strong></div>
+                    <div class="col-md-3">Стоимость:&nbsp;<strong><?=$model->free ? 'Бесплатно' : $model->price_min." р" ?></strong></div>
+                    <div class="col-md-3">Категории: <strong><?=$model->getCategoriesStr()?></strong></div>
+            </div>
+            <?=$model->description?>
         </div>
     </div>

@@ -44,10 +44,16 @@ return [
             'enablePrettyUrl' => true,
             'suffix' => '/',
             'rules' => [
+
+                'about' => 'site/about',
+                'contacts' => 'site/contacts',
+                'events/<slug:[-\w]+>' => 'events/view',
+                'events' => 'site/index',
                 '<controller:\w+>' => '<controller>/index',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:[-\w]+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+
             ]
         ],
         'log' => [

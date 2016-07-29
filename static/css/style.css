@@ -1,6 +1,5 @@
 .event-preview {
     background-color: #fff;
-    height: 530px;
     margin-top: 20px;
 }
 
@@ -15,7 +14,7 @@
 }
 
 .event-preview__body {
-    padding: 10%;
+    padding: 20px 10% 10px;
     font-size: 16px;
 }
 
@@ -31,7 +30,8 @@
 }
 
 .event-preview__text {
-    height: 15em;
+    height: 16em;
+    line-height: 1.5em;
 }
 
 .event-preview__readmore:hover {
@@ -55,4 +55,11 @@
     margin: 12px 0;
     padding: 6px 18px;
     position: relative;
+    min-height: 2em;
+}
+
+.box {
+    color: #000;
+    font-size: 1.25em;
+    line-height: 1.6;
 }

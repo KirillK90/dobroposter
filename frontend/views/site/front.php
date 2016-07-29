@@ -14,7 +14,11 @@ $this->title = 'Афиша Добрых Событий'
     <?=ListView::widget([
         'dataProvider' => $model->search(),
         'itemView' => '_event',
-        'layout' => "{items}\n{pager}"
+        'pager' => [
+            'pagination' => ['route' => '/'],
+            'options' => ['class' => 'pagination pagination-lg']
+        ],
+        'layout' => "{items}\n<div class=\"col-md-12 text-center\">{pager}</div>"
     ])?>
 </div>
 
