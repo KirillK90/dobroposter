@@ -9,12 +9,7 @@ body {
     font-family: "Roboto",Arial,Helvetica,sans-serif;
     font-weight: 300;
     line-height: 1.8;
-    background: url('../images/wood-bg.png') repeat left top fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-
+    background: #f1ede6 url("../images/wood-bg.png") repeat left top;
 }
 
 body, html {
