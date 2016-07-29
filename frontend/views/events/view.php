@@ -13,7 +13,7 @@ $this->title = $model->title;
 
     <div class="box">
         <div class="col-lg-12">
-            <h1 class="intro-text text-center">Cобытие <strong><?=$model->title?></strong></h1>
+            <h1 class="headline text-center"><?=$model->title?></h1>
             <hr class="visible-xs">
             <div class="row" style="margin: 15px -10px;">
                     <div class="col-md-4"><i class="glyphicon glyphicon-time"></i>&nbsp;<strong><?=$model->getTimePeriod()?></strong></div>
