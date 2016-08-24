@@ -3,7 +3,6 @@
 namespace frontend\models;
 
 use common\models\Event;
-use Yii;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -29,13 +28,17 @@ class EventsFilter extends Event
     public function search()
     {
         $query = Event::find();
-
+        $query->distinct();
         $query->andFilterWhere([
             'id' => $this->id,
             'title' => $this->title,
             'format_id' => $this->format_id,
             'place_id' => $this->place_id,
         ]);
+        if ($this->category_ids) {
+            $query->leftJoin('event_category', 'event.id = event_category.event_id');
+            $query->andWhere(['in', 'event_category.category_id', $this->category_ids]);
+        }
 
         return new ActiveDataProvider([
             'query' => $query,

@@ -11,17 +11,19 @@ use yii\helpers\Url;
 $this->title = 'Афиша Добрых Событий'
 ?>
 
-<div class="col-md-4">
+<div class="col-md-6">
     <div class="event-preview">
         <div class="event-preview__header">
-            <a href="<?=Url::to(['/events/view', 'id' => $model->id])?>">
+            <a href="<?=$model->getUrl(); ?>">
                 <img class="img-responsive" src="<?=$model->getImageSrc(true)?>" alt="<?=$model->title?>" />
             </a>
         </div>
         <div class="event-preview__body">
             <div class="event-preview__text">
 
-                <h2 class="event-preview__title text-center"><?=$model->title?></h2>
+                <h2 class="event-preview__title text-center"><a href="<?=$model->getUrl(); ?>">
+                        <?=$model->title?>
+                    </a></h2>
                 <strong class="event-preview__time"><i class="glyphicon glyphicon-time"></i>&nbsp;<?=$model->getTimePeriod()?></strong><br>
 
                 <?=$model->announcement?>

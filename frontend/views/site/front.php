@@ -1,24 +1,42 @@
 <?php
 
+use common\enums\Block;
+use common\models\Category;
 use frontend\components\View;
 use frontend\models\EventsFilter;
-use yii\widgets\ListView;
+use yii\helpers\Url;
 
 /**
  * @var $this View
  * @var $model EventsFilter
  */
 $this->title = 'Афиша Добрых Событий'
+
 ?>
-<div class="row">
-    <?=ListView::widget([
-        'dataProvider' => $model->search(),
-        'itemView' => '_event',
-        'pager' => [
-            'pagination' => ['route' => '/'],
-            'options' => ['class' => 'pagination pagination-lg']
-        ],
-        'layout' => "{items}\n<div class=\"col-md-12 text-center\">{pager}</div>"
-    ])?>
+<div class="row" id="events-list">
+    <?=$this->render('_events', ['model' => $model])?>
 </div>
 
+<? $this->beginBlock(Block::RIGHT_SIDEBAR); ?>
+<div class="block">
+    <h6 class="block-title">Категории</h6>
+    <div class="block-body">
+        <ul>
+            <?foreach(Category::getCountList() as $id => $name): ?>
+                <li><a class="ajax-filter" href="<?= Url::to(["site/filter", 'category_id' => $id])?>"><?=$name?></a></li>
+            <?endforeach; ?>
+        </ul>
+    </div>
+</div>
+<? $this->endBlock() ?>
+
+<?
+$this->registerJs(<<<JS
+$(".ajax-filter").click(function(e){
+    e.preventDefault();
+    console.log($(this).attr('href'));
+    $("#events-list").load($(this).attr('href'));
+    return false;
+})
+JS
+);

@@ -49,12 +49,20 @@ class EventsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionView($slug)
+    public function actionView($slug, $preview=false)
     {
         /** @var Event $model */
         $model = Event::find()->where(['slug' => $slug])->one();
         if (!$model) {
             throw new NotFoundHttpException("Событие не найдено");
+        } elseif ($preview) {
+            $model->preview = true;
+        } elseif (!$model->published()) {
+            if (!$this->getView()->isPrivilegedUser()) {
+                throw new NotFoundHttpException('Материал снят с публикации');
+            }
+        } else {
+            $model->updateCounters(['views_count' => 1]);
         }
         return $this->render('view', compact('model'));
     }

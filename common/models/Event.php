@@ -35,14 +35,19 @@ use yii\image\drivers\Image;
  * @property integer $updated_by
  * @property string $updated_at
  * @property string $published_at
+ * @property integer $views_count
  *
  * @property Category[] $categories
  * @property Format $format
  * @property Place $place
+ * @property User $author
+ * @property User $updater
  */
 class Event extends \yii\db\ActiveRecord
 {
     public $author_id;
+
+    public $preview = false;
 
     const IMAGE_PREVIEW_WIDTH = 350;
     const IMAGE_PREVIEW_HEIGHT = 158;
@@ -144,6 +149,23 @@ class Event extends \yii\db\ActiveRecord
             [['title', 'slug', 'announcement', 'status', 'image_src', 'url'], 'string', 'max' => 255],
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdater()
+    {
+        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+    }
+
 
     /**
      * @inheritdoc
@@ -254,5 +276,26 @@ class Event extends \yii\db\ActiveRecord
     public function getCategoriesStr()
     {
         return implode(', ', ArrayHelper::getColumn($this->categories, 'name'));
+    }
+
+    public function published()
+    {
+        return $this->status == EventStatus::PUBLISHED;
+    }
+
+    public function isDraft()
+    {
+        return $this->status == EventStatus::DRAFT;
+    }
+
+    public function getViewUrl($preview = null)
+    {
+        /** @var UrlManager $urlManger */
+        return Yii::getAlias('@site').'/events/'.$this->slug."/".($preview ? "?preview=1" : '');
+    }
+
+    public function getUrl()
+    {
+        return Url::to(['/events/view', 'slug' => $this->slug]);
     }
 }

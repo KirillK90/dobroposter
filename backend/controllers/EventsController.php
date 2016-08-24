@@ -3,6 +3,7 @@ namespace backend\controllers;
 
 use backend\components\Controller;
 use backend\models\EventsFilter;
+use common\enums\EventStatus;
 use common\models\Event;
 use Yii;
 use yii\base\NotSupportedException;
@@ -53,9 +54,21 @@ class EventsController extends Controller
                 return ActiveForm::validate($model);
             }
 
-            if ($model->save()) {
+            if (isset($_POST['publish'])) {
+                $model->status = EventStatus::PUBLISHED;
+            }
+            if (isset($_POST['unpublish'])) {
+                $model->status = EventStatus::UNPUBLISHED;
+            } elseif ($model->save()) {
+                if (isset($_POST['publish'])) {
+                    $this->setFlash('info', "Материал опубликован");
+                }
+                if (isset($_POST['preview'])) {
+                    $model->preview = true;
+                    $this->setFlash('info', "Режим предпросмотра");
+                }
                 $this->setFlash('success', ACTION_UPDATE_SUCCESS);
-                $this->redirect(['update', 'id' => $model->id]);
+                $model->refresh();
             } else {
                 $this->setFlash('error', ACTION_VALIDATE_ERROR);
             }

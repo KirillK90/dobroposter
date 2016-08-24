@@ -9,6 +9,9 @@ use frontend\components\View;
  * @var $flashMessages
  */
 $this->title = $model->title;
+if ($model->preview) {
+    $this->registerJsFile('@static/js/iframeResizer.contentWindow.min.js');
+}
 ?>
 
     <div class="box">

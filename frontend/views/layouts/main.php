@@ -5,6 +5,7 @@
  * @var $content string
  */
 
+use common\enums\Block;
 use frontend\assets\AppAsset;
 use frontend\components\View;
 use yii\bootstrap\Nav;
@@ -49,8 +50,15 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
     ]); ?>
     <? NavBar::end(); ?>
+    <div class="row">
+        <div class="col-lg-9">
+            <?=$content?>
+        </div>
+        <div class="col-lg-3">
+            <?= $this->renderBlock(Block::RIGHT_SIDEBAR); ?>
+        </div>
+    </div>
 
-    <?=$content?>
 </div>
 </div>
 <!-- /.container -->

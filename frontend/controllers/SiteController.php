@@ -60,6 +60,13 @@ class SiteController extends Controller
         return $this->render('front', ['model' => $model]);
     }
 
+    public function actionFilter($category_id)
+    {
+        $model = new EventsFilter();
+        $model->category_ids[] = $category_id;
+        return $this->renderAjax('_events', ['model' => $model]);
+    }
+
     public function actionAbout()
     {
         return $this->render('about');
